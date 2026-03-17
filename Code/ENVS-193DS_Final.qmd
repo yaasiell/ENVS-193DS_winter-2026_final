@@ -24,6 +24,8 @@ library(tidyverse) # data wrangling and plotting
 library(here) # direct file paths to call from
 library(janitor) # to examine and read in data
 library(readxl) # reads excel files
+# read in kelp data set
+kelp <- read_csv(here("data","Annual_Kelp_All_Years_20250903.csv"))
 
 ```
 
@@ -44,3 +46,5 @@ The median flooded wetland area did not differ between the water year classifica
 ### d. Interpretation
 
 Based on the Peterson et al. study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on  moving, retaining or restricting water on specific areas near the wetlands.
+
+## Problem 2. Data visualization
