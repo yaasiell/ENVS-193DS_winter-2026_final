@@ -4,14 +4,17 @@ author: "Yaasiel Leos Ledesma"
 date: "2026-03-17"
 editor: visual
 format:
-   html: 
-  toc: true # use this to display table of contents
-execute: 
-  warning: false # use this to make sure messages don't show up
-  message: false # use this to make sure warning messages don't show up
+  html:
+    toc: true # use this to display table of contents
+execute:
+  warning: false # use this to make sure messages don't show up.
+  message: false # use this to make sure warning don't show up
 ---
-GitHub repository: [https://github.com/yaasiell/ENVS-193DS_winter-2026_final.git]
+
+[GitHub repository](https://github.com/yaasiell/ENVS-193DS_winter-2026_final.git)
+
 # Set Up
+
 ```{r}
 #| label: Read in Packages and Data
 #| message: false
@@ -24,3 +27,10 @@ library(readxl) # reads excel files
 
 ```
 
+## Problem 1
+
+### a. Transparent statistical methods
+
+### b. Figure needed
+
+### c. Suggestions for rewriting
