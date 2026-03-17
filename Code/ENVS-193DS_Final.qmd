@@ -30,7 +30,17 @@ library(readxl) # reads excel files
 ## Problem 1
 
 ### a. Transparent statistical methods
+In part 1, my coworker used a linear regression statistical method because it compared one predictor variable as precipitation to predict a continuous response variable as flooded wetland area. In part 2 of the results, my coworker used a Kruskal-Wallis test because they compared a median flooded wetland area with more than 2 water year classification categories (5 total).
 
 ### b. Figure needed
+I think that one figure that could accompany the statement for part 2 would be a box plot. The x-axis would show the predictor variable of 5  water year classification categories as wet, above normal, below normal, dry, and critical drought. The y-axis would show the response variable of flooded wetland area ($m^2$). Each individual box plot would show the median, interquartile range and the spread to compare distribution across classifications that align with the Kruskal-Wallis test. 
 
 ### c. Suggestions for rewriting
+
+The flooded wetland area did not have evidence of having a relationship with precipitation. This would suggest that precipitation on its own is not a good predictor variable to predict the wetland flooding area in the San Joaquin River Delta (linear regression, test statistic = N/A, df = N/A, p = 0.11, $\alpha$ = significance level). 
+
+The median flooded wetland area did not differ between the water year classifications. This would suggest that across the wet, above normal, below normal, dry, and critical drought years had similar median flooding conditions (Kruskal-Wallis test, test statistic = N/A, df = N/A, p = 0.12, $\alpha$ = significance level)
+
+### d. Interpretation
+
+Based on the Peterson et al. study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on  moving, retaining or restricting water on specific areas near the wetlands.

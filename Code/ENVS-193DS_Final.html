@@ -73,6 +73,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="ENVS-193DS_Final_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="ENVS-193DS_Final_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -91,6 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a.-transparent-statistical-methods" id="toc-a.-transparent-statistical-methods" class="nav-link" data-scroll-target="#a.-transparent-statistical-methods">a. Transparent statistical methods</a></li>
   <li><a href="#b.-figure-needed" id="toc-b.-figure-needed" class="nav-link" data-scroll-target="#b.-figure-needed">b. Figure needed</a></li>
   <li><a href="#c.-suggestions-for-rewriting" id="toc-c.-suggestions-for-rewriting" class="nav-link" data-scroll-target="#c.-suggestions-for-rewriting">c.&nbsp;Suggestions for rewriting</a></li>
+  <li><a href="#d.-interpretation" id="toc-d.-interpretation" class="nav-link" data-scroll-target="#d.-interpretation">d.&nbsp;Interpretation</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -143,12 +173,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="problem-1">Problem 1</h2>
 <section id="a.-transparent-statistical-methods" class="level3">
 <h3 class="anchored" data-anchor-id="a.-transparent-statistical-methods">a. Transparent statistical methods</h3>
+<p>In part 1, my coworker used a linear regression statistical method because it compared one predictor variable as precipitation to predict a continuous response variable as flooded wetland area. In part 2 of the results, my coworker used a Kruskal-Wallis test because they compared a median flooded wetland area with more than 2 water year classification categories (5 total.)</p>
 </section>
 <section id="b.-figure-needed" class="level3">
 <h3 class="anchored" data-anchor-id="b.-figure-needed">b. Figure needed</h3>
+<p>I think that one figure that could accompany the statement for part 2 would be a box plot. The x-axis would show the predictor variable of 5 water year classification categories as wet, above normal, below normal, dry, and critical drought. The y-axis would show the response variable of flooded wetland area (<span class="math inline">\(m^2\)</span>). Each individual box plot would show the median, interquartile range and the spread to compare distribution across classifications that align with the Kruskal-Wallis test.</p>
 </section>
 <section id="c.-suggestions-for-rewriting" class="level3">
 <h3 class="anchored" data-anchor-id="c.-suggestions-for-rewriting">c.&nbsp;Suggestions for rewriting</h3>
+<p>The flooded wetland area did not have evidence of having a relationship with precipitation. This would suggest that precipitation on its own is not a good predictor variable to predict the wetland flooding area in the San Joaquin River Delta (linear regression, test statistic = N/A, df = N/A, p = 0.11, <span class="math inline">\(\alpha\)</span> = significance level).</p>
+<p>The median flooded wetland area did not differ between the water year classifications. This would suggest that across the wet, above normal, below normal, dry, and critical drought years had similar median flooding conditions (Kruskal-Wallis test, test statistic = N/A, df = N/A, p = 0.12, <span class="math inline">\(\alpha\)</span> = significance level)</p>
+</section>
+<section id="d.-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="d.-interpretation">d.&nbsp;Interpretation</h3>
+<p>Based on the Peterson et al.&nbsp;study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on moving, retaining or restricting water on specific areas near the wetlands.</p>
 </section>
 </section>
 </section>
