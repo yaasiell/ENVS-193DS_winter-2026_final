@@ -78,3 +78,32 @@ str(kelp_clean) # str() displays the structure of the data set
 
 ```
 
+### b. Understanding the data
+
+### c. Visualize the data
+
+### d. Interpretation
+
+## Problem 3. Data analysis
+
+### a. Response variable 
+### b. Purpose of study 
+### c. Table of models
+### d. Run the models
+### e. Select the best model
+### f. Check the diagnostics
+### g. Visualize the model predictions
+### h. Write a caption for your figure
+### i. Calculate model predictions
+### j. Interpret your results
+
+## Problem 4. Affective and exploratory visualizations
+### a. Comparing visualizations
+### b. Designing an analysis
+### c. Check any assumptions and run your analysis
+### d. Create a visualization
+### e. Write a caption
+### f. Write about your results 
+### g. Sharing your affective visualization
+
+
