@@ -48,3 +48,33 @@ The median flooded wetland area did not differ between the water year classifica
 Based on the Peterson et al. study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on  moving, retaining or restricting water on specific areas near the wetlands.
 
 ## Problem 2. Data visualization
+### a. Cleaning and summarizing
+```{r}
+#| label: Cleaning and Summarizing
+#| message: false
+#| warning: false
+# Clean and Summarize data frame
+kelp_clean <- kelp |> # creating a new object
+  clean_names() |> # changes column names to lowercase and underscores
+  # filters to use only the 3 sites chosen
+  filter(site %in% c("IVEE","NAPL","CARP")) |> 
+  # creates a new column with the full site names chosen
+  mutate(site_name = case_when(
+  site == "NAPL" ~ "Naples", # data frame site column == site abbreviation ~ new named column
+  site == "IVEE" ~ "Isla Vista",
+  site == "CARP" ~ "Carpinteria"
+)) |>
+  mutate(site_name = as_factor(site_name), # as_factor() to convert site name to a factor 
+         # fct_relevel() reorders the levels of a factor 
+       site_name = fct_relevel(site_name,
+                               "Naples", "Isla Vista", "Carpinteria")) |>
+  # filter() used to filter and remove a specific observation
+  filter(!(date == "2000-09-22" & transect == "6" & quad == "40")) |>
+  group_by(site_name, year) |> # group_by() groups data by site and year for summarizing
+  summarize(mean_fronds = mean(fronds)) |> # calculates the mean number of fronds for each site for each year
+  ungroup() # removes the grouping after being summarized
+slice_sample(kelp_clean, n = 5) # displays 5 rows from kelp_clean
+str(kelp_clean) # str() displays the structure of the data set
+
+```
+
