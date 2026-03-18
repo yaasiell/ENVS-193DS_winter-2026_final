@@ -24,8 +24,11 @@ library(tidyverse) # data wrangling and plotting
 library(here) # direct file paths to call from
 library(janitor) # to examine and read in data
 library(readxl) # reads excel files
+library(DHARMa) # checks diagnostics for model using simulated residuals
 # read in kelp data set
 kelp <- read_csv(here("data","Annual_Kelp_All_Years_20250903.csv"))
+# read in mountain plover data
+mopl <- read_csv(here("data","MOPL_nest-site_selection_Duchardt_et_al._2019.csv"))
 
 ```
 
@@ -122,6 +125,7 @@ The site with the most variable mean kelp fronds per year was found to be Isla V
 ## Problem 3. Data analysis
 
 ### a. Response variable 
+
 ### b. Purpose of study 
 ### c. Table of models
 ### d. Run the models
