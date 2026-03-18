@@ -256,8 +256,27 @@ pred_0
 Based on my findings, the predicted probability of Mountain Plover nest cite occupancy at 0 being no visual obstruction (vo_nest = 0) is about 0.73 (95% CI: 0.65-0.80). In figure 1, it shows a visual representation that as visual obstruction increases, the probability of a nest site decreases represented by the blue model prediction line showing a downward trend. There was little or no evidence found that prairie dog colonies influenced the probability of Mountain Plover nesting in the models. To explain the trends biologically, the Mountain Plovers would rather prefer to nest in areas that are more open with lower vegetation near the areas. This could mean in biological terms that an increase of visual obstruction would likely reduce the nest site preference because it would limit their ability to see predators coming. 
 
 ## Problem 4. Affective and exploratory visualizations
+
 ### a. Comparing visualizations
+
+How are the visualizations different from each other in the way you have represented your data?
+
+In my homework 2 exploratory visualizations they were made to represent my data in a structured and quantitative way using axes, points, and statistical methods of using box plots and scatter plots to show any clear relationships between my chosen variables like time of departure and total commute time. In contrast, my affective visualization represents similar data in a more abstract and minimal way representing the same data but instead using wave patterns, color, and background color to represent a different variables rather than using numbers and points. My affective visualization uses a lot more colors and shapes but no words or axis to describe and define it without the artistic statement. 
+
+What similarities do you see between all your visualizations?
+
+Similarities that I found between all my visualizations was that I still focused on how my commute time could change based on different conditions such as the weather, commute time, traffic level. It is still a similar attempt to show any variation of each data point in trying to find any variation of travel patterns and how it could affect commute time remained the same. I also included all the individual data points recorded similar to my homework 2 visualizations and can still visualize patterns with both visualizatons. 
+
+What patterns (e.g. differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization?Are these different between visualizations? If so, why? If not, why not?
+
+Across all visualizations, I notice the pattern that commute times do tend to vary depnding on different road conditions such as traffic and the time of day because some trips would take longer than others based on the time of departure using homework 2 visualization. The patterns arent different but just represneted differently. The exploratory plots helped me notice exact variables and trends, and the affective visualization helped me emphasize how frequently I commuted and how many of those days were with traffic and found that they varied a lot.  
+
+What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.
+
+For the feedback I got in week 9 workshop I was able to implement a lot of the suggestions from my fellow classmates such as using a vertical plot visualization to make it easier to read. What didn't work was using a box graph to represent the data because it seemed too much like a regular box plot and wanted to make something more abstract and minimal. Another thing I was able to implement based on my suggestions were using stop light colors to represent the level of traffic conditions and was a perfect idea to symbolize the road and use colors to differentiate each data point in my affective visualization. 
+
 ### b. Designing an analysis
+
 ### c. Check any assumptions and run your analysis
 ### d. Create a visualization
 ### e. Write a caption
