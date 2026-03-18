@@ -25,6 +25,7 @@ library(here) # direct file paths to call from
 library(janitor) # to examine and read in data
 library(readxl) # reads excel files
 library(DHARMa) # checks diagnostics for model using simulated residuals
+library(ggeffects)
 # read in kelp data set
 kelp <- read_csv(here("data","Annual_Kelp_All_Years_20250903.csv"))
 # read in mountain plover data
@@ -241,6 +242,15 @@ ggplot(data = mopl_clean, # calls for mopl_clean data
 Figure 1. Effect of visual obstruction on Mountain Plover Nesting Site use.The red data points represent the observed data of available nest sites were a value of 1 would indicate a nest site that was used, and a 0 in the y-axis shows that a nest site was available but not used. The blue curved line represents the the predicted probability of nest site usage across all the values recorded of visual obstruction at the nest site. The gray ribbon represent the 95% confidence interval around the model predictions. The data comes from: Duchardt, Courtney; Beck, Jeffrey; Augustine, David (2020). Data from: Mountain Plover habitat selection and nest survival in relation to weather variability and spatial attributes of Black-tailed Prairie Dog disturbance [Dataset]. Dryad. https://doi.org/10.5061/dryad.ttdz08kt7 
 
 ### i. Calculate model predictions
+```{r}
+# use ggpredict to calculate predicted probability at 0 index
+pred_0 <- ggpredict(m2, terms = "vo_nest [0]")
+
+# call to display the output
+pred_0
+
+```
+
 ### j. Interpret your results
 
 ## Problem 4. Affective and exploratory visualizations
