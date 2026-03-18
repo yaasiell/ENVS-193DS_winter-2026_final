@@ -186,8 +186,39 @@ sim_res <- simulateResiduals(m2)
 plot(sim_res)
 ```
 
-
 ### g. Visualize the model predictions
+
+```{r}
+#| label: Visualizing model predictions
+# call for ggplot to create a plot
+ggplot(data = mopl_clean, # calls for mopl_clean data
+       aes(x = vo_nest, # assigns x axis to visual obstruction
+           y = used_bin)) + # assigns y axis to binary nest use
+  
+  geom_point(color = "red2") + # to plot raw data points 
+  
+  geom_line(data = pred_data, # adds model prediction line
+            aes(x = vo_nest, # assigns x and y axis data for line
+                y = fit),
+            color ="blue3", # changes color of prediction line
+            linewidth = 2, # changes line width 
+            inherit.aes = FALSE) + # prevents using used_bin
+  
+  geom_ribbon(data = pred_data, # adds 95% CI around prediction line
+              aes(x = vo_nest,
+                  ymin = lwr, # lower bound
+                  ymax = upr), # upper bound 
+              alpha = 0.1, # changes transparency of ribbon
+              inherit.aes = FALSE) +
+  # labels the x and y axis in the table
+  labs(x = "Visual obstruction at nest",
+       y = "Probability of nest site use") +
+  
+  theme_classic() # changes theme
+
+
+```
+
 ### h. Write a caption for your figure
 ### i. Calculate model predictions
 ### j. Interpret your results
