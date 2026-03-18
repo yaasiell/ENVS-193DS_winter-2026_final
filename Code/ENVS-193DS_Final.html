@@ -251,11 +251,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Isla Vista   2023        3.78
-2 Isla Vista   2012       12.8 
-3 Naples       2016        7.26
-4 Carpinteria  2022        9.52
-5 Naples       2008        6.62</code></pre>
+1 Carpinteria  2000        7.98
+2 Carpinteria  2024        5.67
+3 Isla Vista   2007       23.6 
+4 Naples       2020        7.41
+5 Naples       2005       10.2 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -268,9 +268,47 @@ window.Quarto = {
 </section>
 <section id="b.-understanding-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="b.-understanding-the-data">b. Understanding the data</h3>
+<p>The observation from 2000-09-22 in transect 6, quad 40 were filtered out because it had a frond value of -99999 which was used to represent missing data instead of an actual measurement.In the Methods and Protocls section of “KFCD abundance and size of giant kelp” data set in the SBC LTER’s data catalog it indicates that the data was either not collected for a particular species or the datasheet was lost needing to be removed before being analyzed.</p>
 </section>
 <section id="c.-visualize-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="c.-visualize-the-data">c.&nbsp;Visualize the data</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing Kelp Data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot() to initialize objeect</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(kelp_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="co"># calls for year to represent x-axis</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> mean_fronds, <span class="co"># calls for mean fronds data to represent y-axis</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> site_name)) <span class="sc">+</span> <span class="co"># color added to site name</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_line() adds a line to connect mean frond values for each site</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="co"># geom_point() adds points for each yearly mean frond value</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="co"># labs() calls for labels </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sites vary in mean kelp fronds per year"</span>, <span class="co"># labels the title</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, <span class="co"># labels the x-axis</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean kelp fronds per year"</span>, <span class="co"># labels the y-axis</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Site"</span> <span class="co"># labels the legend </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># adds the required title and axis/legend text</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>( <span class="co"># manually assing colors to values</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Naples"</span> <span class="ot">=</span> <span class="st">"dodgerblue2"</span>, <span class="co"># change the color of Naples data</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Isla Vista"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, <span class="co"># change the color of Isla Vista data</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Carpinteria"</span> <span class="ot">=</span> <span class="st">"lightpink3"</span> <span class="co"># change the color of Carpinteria data</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># applies a minimal theme with a custom font that is consistent</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Arial"</span>) <span class="sc">+</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>), <span class="co"># adjust the centering of the plot title</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>() <span class="co"># removes the panel boarder to show a grid without a border </span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_Final_files/figure-html/Visualizing%20Kelp%20data-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="d.-interpretation-1" class="level3">
 <h3 class="anchored" data-anchor-id="d.-interpretation-1">d.&nbsp;Interpretation</h3>

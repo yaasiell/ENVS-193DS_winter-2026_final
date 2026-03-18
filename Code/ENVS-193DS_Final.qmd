@@ -82,7 +82,39 @@ str(kelp_clean) # str() displays the structure of the data set
 The observation from 2000-09-22 in transect 6, quad 40 were filtered out because it had a frond value of -99999 which was used to represent missing data instead of an actual measurement.In the Methods and Protocls section of "KFCD abundance and size of giant kelp" data set in the SBC LTER's data catalog it indicates that the data was either not collected for a particular species or the datasheet was lost needing to be removed before being analyzed. 
 
 ### c. Visualize the data
-
+```{r}
+#| label: Visualizing Kelp data
+#| message: false
+#| warning: false
+# Visualizing Kelp Data
+# ggplot() to initialize objeect
+ggplot(kelp_clean, aes(x = year, # calls for year to represent x-axis
+                       y = mean_fronds, # calls for mean fronds data to represent y-axis
+                       color = site_name)) + # color added to site name
+  # geom_line() adds a line to connect mean frond values for each site
+  geom_line(linewidth = 0.7) +
+  geom_point(size = 2) + # geom_point() adds points for each yearly mean frond value
+  labs( # labs() calls for labels 
+    title = "Sites vary in mean kelp fronds per year", # labels the title
+    x = "Year", # labels the x-axis
+    y = "Mean kelp fronds per year", # labels the y-axis
+    color = "Site" # labels the legend 
+  ) +
+  # adds the required title and axis/legend text
+  scale_color_manual( # manually assing colors to values
+    values = c(
+      "Naples" = "dodgerblue2", # change the color of Naples data
+      "Isla Vista" = "darkgreen", # change the color of Isla Vista data
+      "Carpinteria" = "lightpink3" # change the color of Carpinteria data
+    )
+  ) +
+  # applies a minimal theme with a custom font that is consistent
+  theme_minimal(base_family = "Arial") +
+  theme(
+    plot.title = element_text(hjust = 0.5), # adjust the centering of the plot title
+    panel.border = element_blank() # removes the panel boarder to show a grid without a border 
+  )
+```
 
 ### d. Interpretation
 
