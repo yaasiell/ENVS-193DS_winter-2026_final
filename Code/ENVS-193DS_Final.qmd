@@ -190,6 +190,23 @@ plot(sim_res)
 
 ```{r}
 #| label: Visualizing model predictions
+# used to generate smoother model predictions
+pred_data <- data.frame(
+  vo_nest = seq(min(mopl_clean$vo_nest),
+                max(mopl_clean$vo_nest),
+                length.out = 100)
+)
+# used to generate predicted values from model
+pred <- predict(m2,
+                newdata = pred_data,
+                type = "link",
+                se.fit = TRUE)
+# converts predicted values to probabilities (0-1 scale)
+pred_data$fit <- plogis(pred$fit)
+# to calculate lower bound of CI
+pred_data$lwr <- plogis(pred$fit - 1.96 * pred$se.fit)
+# to calculate upper bound of CI
+pred_data$upr <- plogis(pred$fit + 1.96 * pred$se.fit)
 # call for ggplot to create a plot
 ggplot(data = mopl_clean, # calls for mopl_clean data
        aes(x = vo_nest, # assigns x axis to visual obstruction
@@ -220,6 +237,8 @@ ggplot(data = mopl_clean, # calls for mopl_clean data
 ```
 
 ### h. Write a caption for your figure
+
+
 ### i. Calculate model predictions
 ### j. Interpret your results
 

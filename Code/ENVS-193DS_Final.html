@@ -254,11 +254,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Naples       2022        7.99
-2 Carpinteria  2003        5.27
-3 Isla Vista   2010        4.78
-4 Isla Vista   2018       34.5 
-5 Carpinteria  2012       16.6 </code></pre>
+1 Naples       2020        7.41
+2 Naples       2007       17.2 
+3 Isla Vista   2020       25.0 
+4 Carpinteria  2008        6.03
+5 Naples       2019        4.47</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -421,6 +421,54 @@ window.Quarto = {
 </section>
 <section id="g.-visualize-the-model-predictions" class="level3">
 <h3 class="anchored" data-anchor-id="g.-visualize-the-model-predictions">g. Visualize the model predictions</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call for ggplot to create a plot</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pred_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vo_nest =</span> <span class="fu">seq</span>(<span class="fu">min</span>(mopl_clean<span class="sc">$</span>vo_nest),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">max</span>(mopl_clean<span class="sc">$</span>vo_nest),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(m2,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">newdata =</span> pred_data,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">"link"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>pred_data<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="fu">plogis</span>(pred<span class="sc">$</span>fit)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>pred_data<span class="sc">$</span>lwr <span class="ot">&lt;-</span> <span class="fu">plogis</span>(pred<span class="sc">$</span>fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> pred<span class="sc">$</span>se.fit)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>pred_data<span class="sc">$</span>upr <span class="ot">&lt;-</span> <span class="fu">plogis</span>(pred<span class="sc">$</span>fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> pred<span class="sc">$</span>se.fit)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mopl_clean, <span class="co"># calls for mopl_clean data</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> vo_nest, <span class="co"># assigns x axis to visual obstruction</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> used_bin)) <span class="sc">+</span> <span class="co"># assigns y axis to binary nest use</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"red2"</span>) <span class="sc">+</span> <span class="co"># to plot raw data points </span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data, <span class="co"># adds model prediction line</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> vo_nest, <span class="co"># assigns x and y axis data for line</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> fit),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span><span class="st">"blue3"</span>, <span class="co"># changes color of prediction line</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="co"># changes line width </span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="co"># prevents using used_bin</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> pred_data, <span class="co"># adds 95% CI around prediction line</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> vo_nest,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> lwr, <span class="co"># lower bound</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> upr), <span class="co"># upper bound </span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="co"># changes transparency of ribbon</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>              <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># labels the x and y axis in the table</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Visual obstruction at nest"</span>,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Probability of nest site use"</span>) <span class="sc">+</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="co"># changes theme</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_Final_files/figure-html/Visualizing%20model%20predictions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="h.-write-a-caption-for-your-figure" class="level3">
 <h3 class="anchored" data-anchor-id="h.-write-a-caption-for-your-figure">h. Write a caption for your figure</h3>
