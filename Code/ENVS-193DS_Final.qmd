@@ -117,6 +117,7 @@ ggplot(kelp_clean, aes(x = year, # calls for year to represent x-axis
 ```
 
 ### d. Interpretation
+The site with the most variable mean kelp fronds per year was found to be Isla Vista because of how the graph shows large fluctuating peaks near 30-40 and lower peaks at 5-10 fronds representing a wide range of variability across multiple years. The site with the least variable mean kelp frond per year was found to be Carpinteria because the values stay at a consistent range throughout the years with a smaller fluctuation from 4-15 fronds per year. 
 
 ## Problem 3. Data analysis
 
