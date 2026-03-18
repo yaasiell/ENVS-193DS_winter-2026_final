@@ -1,0 +1,30 @@
+Date,Day Of Week,Time of Departure,Commute Time (Minutes),Time of Day,Traffic Level,Weather Conditions,Route 
+2026-01-26,Monday,9:45,65,morning,low,cloudy,alternate 
+2026-01-26,Monday,16:55,80,afternoon,high,clear,alternate 
+2026-01-27,Tuesday,9:30,66,morning,low,clear,main
+2026-01-28,Wednesday,7:20,78,morning,medium,clear,main
+2026-01-29,Thursday,11:10,67,morning,medium,clear,alternate 
+2026-01-30,Friday,7:20,85,morning,high,clear,main
+2026-02-02,Monday,9:53,60,morning,low,clear,main
+2026-02-03,Tuesday,9:50,62,morning,low,clear,main
+2026-02-04,Wednesday,7:40,85,morning,high,clear,main
+2026-02-05,Thursday,11:18,65,morning,low,cloudy ,alternate 
+2026-02-05,Thursday,15:13,107,afternoon,high,cloudy ,alternate 
+2026-02-06,Friday,7:23,89,morning,high,cloudy ,main
+2026-02-07,Monday,9:50,60,morning,low,cloudy ,main
+2026-02-08,Tuesday,9:48,62,morning,low,rain,main
+2026-02-09,Wednesday,7:25,80,morning,medium,rain,main
+2026-02-09,Wednesday,4:45,81,afternoon,medium,cloudy ,alternate 
+2026-02-12,Thursday,11:17,63,afternoon,low,clear,main
+2026-02-13,Friday,7:26,67,morning,low,clear,alternate 
+2026-02-17,Tuesday,10:47,64,morning,low,rain,main
+2026-02-18,Wednesday,7:40,73,morning,low,cloudy ,main
+2026-02-19,Thursday,11:21,60,afternoon,medium,rain,alternate 
+2026-02-20,Friday,7:23,67,morning,medium,cloudy ,main
+2026-02-23,Monday,9:50,63,morning,low,clear,main
+2026-02-24,Tuesday,9:45,60,morning,low,clear,main
+2026-02-25,Wednesday,7:35,90,morning,high,clear,alternate 
+2026-02-26,Thursday,11:17,61,afternoon,low,clear,main
+2026-02-27,Friday,7:30,75,morning,low,clear,main
+2026-03-02,Monday,9:48,64,morning,low,clear,main
+2026-03-03,Tuesday,9:50,63,morning,low,cloudy ,main

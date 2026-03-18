@@ -30,29 +30,34 @@ library(ggeffects)
 kelp <- read_csv(here("data","Annual_Kelp_All_Years_20250903.csv"))
 # read in mountain plover data
 mopl <- read_csv(here("data","MOPL_nest-site_selection_Duchardt_et_al._2019.csv"))
-
+# read in commute data
+commute <- read_csv(here("data","updated_commute.csv"))
 ```
 
 ## Problem 1
 
 ### a. Transparent statistical methods
+
 In part 1, my coworker used a linear regression statistical method because it compared one predictor variable as precipitation to predict a continuous response variable as flooded wetland area. In part 2 of the results, my coworker used a Kruskal-Wallis test because they compared a median flooded wetland area with more than 2 water year classification categories (5 total).
 
 ### b. Figure needed
-I think that one figure that could accompany the statement for part 2 would be a box plot. The x-axis would show the predictor variable of 5  water year classification categories as wet, above normal, below normal, dry, and critical drought. The y-axis would show the response variable of flooded wetland area ($m^2$). Each individual box plot would show the median, interquartile range and the spread to compare distribution across classifications that align with the Kruskal-Wallis test. 
+
+I think that one figure that could accompany the statement for part 2 would be a box plot. The x-axis would show the predictor variable of 5 water year classification categories as wet, above normal, below normal, dry, and critical drought. The y-axis would show the response variable of flooded wetland area ($m^2$). Each individual box plot would show the median, interquartile range and the spread to compare distribution across classifications that align with the Kruskal-Wallis test.
 
 ### c. Suggestions for rewriting
 
-The flooded wetland area did not have evidence of having a relationship with precipitation. This would suggest that precipitation on its own is not a good predictor variable to predict the wetland flooding area in the San Joaquin River Delta (linear regression, test statistic = N/A, df = N/A, p = 0.11, $\alpha$ = significance level). 
+The flooded wetland area did not have evidence of having a relationship with precipitation. This would suggest that precipitation on its own is not a good predictor variable to predict the wetland flooding area in the San Joaquin River Delta (linear regression, test statistic = N/A, df = N/A, p = 0.11, $\alpha$ = significance level).
 
 The median flooded wetland area did not differ between the water year classifications. This would suggest that across the wet, above normal, below normal, dry, and critical drought years had similar median flooding conditions (Kruskal-Wallis test, test statistic = N/A, df = N/A, p = 0.12, $\alpha$ = significance level)
 
 ### d. Interpretation
 
-Based on the Peterson et al. study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on  moving, retaining or restricting water on specific areas near the wetlands.
+Based on the Peterson et al. study and my coworkers analysis, one additional variable that could influence the flooded area of a wetland would be local wetland management action as a categorical predictor variable. This variable might influence wetland flooding because the paper states that wetland management could make decisions on moving, retaining or restricting water on specific areas near the wetlands.
 
 ## Problem 2. Data visualization
+
 ### a. Cleaning and summarizing
+
 ```{r}
 #| label: Cleaning and Summarizing
 #| message: false
@@ -83,9 +88,11 @@ str(kelp_clean) # str() displays the structure of the data set
 ```
 
 ### b. Understanding the data
-The observation from 2000-09-22 in transect 6, quad 40 were filtered out because it had a frond value of -99999 which was used to represent missing data instead of an actual measurement.In the Methods and Protocls section of "KFCD abundance and size of giant kelp" data set in the SBC LTER's data catalog it indicates that the data was either not collected for a particular species or the datasheet was lost needing to be removed before being analyzed. 
+
+The observation from 2000-09-22 in transect 6, quad 40 were filtered out because it had a frond value of -99999 which was used to represent missing data instead of an actual measurement.In the Methods and Protocls section of "KFCD abundance and size of giant kelp" data set in the SBC LTER's data catalog it indicates that the data was either not collected for a particular species or the datasheet was lost needing to be removed before being analyzed.
 
 ### c. Visualize the data
+
 ```{r}
 #| label: Visualizing Kelp data
 #| message: false
@@ -121,27 +128,32 @@ ggplot(kelp_clean, aes(x = year, # calls for year to represent x-axis
 ```
 
 ### d. Interpretation
-The site with the most variable mean kelp fronds per year was found to be Isla Vista because of how the graph shows large fluctuating peaks near 30-40 and lower peaks at 5-10 fronds representing a wide range of variability across multiple years. The site with the least variable mean kelp frond per year was found to be Carpinteria because the values stay at a consistent range throughout the years with a smaller fluctuation from 4-15 fronds per year. 
+
+The site with the most variable mean kelp fronds per year was found to be Isla Vista because of how the graph shows large fluctuating peaks near 30-40 and lower peaks at 5-10 fronds representing a wide range of variability across multiple years. The site with the least variable mean kelp frond per year was found to be Carpinteria because the values stay at a consistent range throughout the years with a smaller fluctuation from 4-15 fronds per year.
 
 ## Problem 3. Data analysis
 
-### a. Response variable 
+### a. Response variable
+
 The 0 and 1's in the data set represent the response variable if a potential nest site was used by a Mountain Plover. A value of 1 represents that a nest site was "used" by the Mountain Plover shown in the id column, and a value of 0 means that the site was "available" or unused by a Mountain Plover shown in the id column.
 
-### b. Purpose of study 
-For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section were visual obstruction is described as being a measure of vegitation structure. 
+### b. Purpose of study
 
-For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions  because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge in the Prairie dog colony-direct section. 
+For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section were visual obstruction is described as being a measure of vegitation structure.
+
+For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge in the Prairie dog colony-direct section.
 
 ### c. Table of models
+
 | Model | Visual Obstruction (vo_nest) | Distance to Colony Edge (edgedist) | Model Description |
-|------|------------------------------|------------------------------------|------------------|
+|--------------|--------------------|------------------------|--------------|
 | 1 | No | No | Null model (intercept only) |
 | 2 | Yes | No | Model with visual obstruction only |
 | 3 | No | Yes | Model with distance to colony edge only |
 | 4 | Yes | Yes | Full model with both predictors |
 
 ### d. Run the models
+
 ```{r}
 #| label: Running Models
 #| message: false
@@ -177,6 +189,7 @@ m4 <- glm(used_bin ~ vo_nest + edgedist, data = mopl_clean, family = "binomial")
 The best model as determined by Akaike's Information Criterion (AIC) was the visual obstruction at the nest as the only predictor of the probability of Mountain plover nest site usage because it had the lowest AIC value compared to all other models.
 
 ### f. Check the diagnostics
+
 ```{r}
 #| label: Checking Diagnostics for model
 # checking diagnostics for the model I selected
@@ -239,9 +252,10 @@ ggplot(data = mopl_clean, # calls for mopl_clean data
 
 ### h. Write a caption for your figure
 
-Figure 1. Effect of visual obstruction on Mountain Plover Nesting Site use.The red data points represent the observed data of available nest sites were a value of 1 would indicate a nest site that was used, and a 0 in the y-axis shows that a nest site was available but not used. The blue curved line represents the the predicted probability of nest site usage across all the values recorded of visual obstruction at the nest site. The gray ribbon represent the 95% confidence interval around the model predictions. The data comes from: Duchardt, Courtney; Beck, Jeffrey; Augustine, David (2020). Data from: Mountain Plover habitat selection and nest survival in relation to weather variability and spatial attributes of Black-tailed Prairie Dog disturbance [Dataset]. Dryad. https://doi.org/10.5061/dryad.ttdz08kt7 
+Figure 1. Effect of visual obstruction on Mountain Plover Nesting Site use.The red data points represent the observed data of available nest sites were a value of 1 would indicate a nest site that was used, and a 0 in the y-axis shows that a nest site was available but not used. The blue curved line represents the the predicted probability of nest site usage across all the values recorded of visual obstruction at the nest site. The gray ribbon represent the 95% confidence interval around the model predictions. The data comes from: Duchardt, Courtney; Beck, Jeffrey; Augustine, David (2020). Data from: Mountain Plover habitat selection and nest survival in relation to weather variability and spatial attributes of Black-tailed Prairie Dog disturbance \[Dataset\]. Dryad. https://doi.org/10.5061/dryad.ttdz08kt7
 
 ### i. Calculate model predictions
+
 ```{r}
 # use ggpredict to calculate predicted probability at 0 index
 pred_0 <- ggpredict(m2, terms = "vo_nest [0]")
@@ -253,7 +267,7 @@ pred_0
 
 ### j. Interpret your results
 
-Based on my findings, the predicted probability of Mountain Plover nest cite occupancy at 0 being no visual obstruction (vo_nest = 0) is about 0.73 (95% CI: 0.65-0.80). In figure 1, it shows a visual representation that as visual obstruction increases, the probability of a nest site decreases represented by the blue model prediction line showing a downward trend. There was little or no evidence found that prairie dog colonies influenced the probability of Mountain Plover nesting in the models. To explain the trends biologically, the Mountain Plovers would rather prefer to nest in areas that are more open with lower vegetation near the areas. This could mean in biological terms that an increase of visual obstruction would likely reduce the nest site preference because it would limit their ability to see predators coming. 
+Based on my findings, the predicted probability of Mountain Plover nest cite occupancy at 0 being no visual obstruction (vo_nest = 0) is about 0.73 (95% CI: 0.65-0.80). In figure 1, it shows a visual representation that as visual obstruction increases, the probability of a nest site decreases represented by the blue model prediction line showing a downward trend. There was little or no evidence found that prairie dog colonies influenced the probability of Mountain Plover nesting in the models. To explain the trends biologically, the Mountain Plovers would rather prefer to nest in areas that are more open with lower vegetation near the areas. This could mean in biological terms that an increase of visual obstruction would likely reduce the nest site preference because it would limit their ability to see predators coming.
 
 ## Problem 4. Affective and exploratory visualizations
 
@@ -261,26 +275,100 @@ Based on my findings, the predicted probability of Mountain Plover nest cite occ
 
 How are the visualizations different from each other in the way you have represented your data?
 
-In my homework 2 exploratory visualizations they were made to represent my data in a structured and quantitative way using axes, points, and statistical methods of using box plots and scatter plots to show any clear relationships between my chosen variables like time of departure and total commute time. In contrast, my affective visualization represents similar data in a more abstract and minimal way representing the same data but instead using wave patterns, color, and background color to represent a different variables rather than using numbers and points. My affective visualization uses a lot more colors and shapes but no words or axis to describe and define it without the artistic statement. 
+In my homework 2 exploratory visualizations they were made to represent my data in a structured and quantitative way using axes, points, and statistical methods of using box plots and scatter plots to show any clear relationships between my chosen variables like time of departure and total commute time. In contrast, my affective visualization represents similar data in a more abstract and minimal way representing the same data but instead using wave patterns, color, and background color to represent a different variables rather than using numbers and points. My affective visualization uses a lot more colors and shapes but no words or axis to describe and define it without the artistic statement.
 
 What similarities do you see between all your visualizations?
 
-Similarities that I found between all my visualizations was that I still focused on how my commute time could change based on different conditions such as the weather, commute time, traffic level. It is still a similar attempt to show any variation of each data point in trying to find any variation of travel patterns and how it could affect commute time remained the same. I also included all the individual data points recorded similar to my homework 2 visualizations and can still visualize patterns with both visualizatons. 
+Similarities that I found between all my visualizations was that I still focused on how my commute time could change based on different conditions such as the weather, commute time, traffic level. It is still a similar attempt to show any variation of each data point in trying to find any variation of travel patterns and how it could affect commute time remained the same. I also included all the individual data points recorded similar to my homework 2 visualizations and can still visualize patterns with both visualizatons.
 
 What patterns (e.g. differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization?Are these different between visualizations? If so, why? If not, why not?
 
-Across all visualizations, I notice the pattern that commute times do tend to vary depnding on different road conditions such as traffic and the time of day because some trips would take longer than others based on the time of departure using homework 2 visualization. The patterns arent different but just represneted differently. The exploratory plots helped me notice exact variables and trends, and the affective visualization helped me emphasize how frequently I commuted and how many of those days were with traffic and found that they varied a lot.  
+Across all visualizations, I notice the pattern that commute times do tend to vary depnding on different road conditions such as traffic and the time of day because some trips would take longer than others based on the time of departure using homework 2 visualization. The patterns arent different but just represneted differently. The exploratory plots helped me notice exact variables and trends, and the affective visualization helped me emphasize how frequently I commuted and how many of those days were with traffic and found that they varied a lot.
 
 What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.
 
-For the feedback I got in week 9 workshop I was able to implement a lot of the suggestions from my fellow classmates such as using a vertical plot visualization to make it easier to read. What didn't work was using a box graph to represent the data because it seemed too much like a regular box plot and wanted to make something more abstract and minimal. Another thing I was able to implement based on my suggestions were using stop light colors to represent the level of traffic conditions and was a perfect idea to symbolize the road and use colors to differentiate each data point in my affective visualization. 
+For the feedback I got in week 9 workshop I was able to implement a lot of the suggestions from my fellow classmates such as using a vertical plot visualization to make it easier to read. What didn't work was using a box graph to represent the data because it seemed too much like a regular box plot and wanted to make something more abstract and minimal. Another thing I was able to implement based on my suggestions were using stop light colors to represent the level of traffic conditions and was a perfect idea to symbolize the road and use colors to differentiate each data point in my affective visualization.
 
 ### b. Designing an analysis
 
+Based on my response variable and one potential predictor variable I would use linear regression to analyze the relationship between my commute time (minutes) as the response variable and Time of Departure (HH:MM) as my predictor variable. This analysis is appropriate because my question focuses on how commute time changes based on what time I leave.
+
 ### c. Check any assumptions and run your analysis
+
+#### check for assumptions
+
+```{r}
+#| label: Checking assumptions
+#| message: false
+#| warning: false
+# clean data and convert time to numeric (minutes)
+# create a new object
+commute_clean <- commute |>
+  clean_names() |> # cleans name and columns
+  mutate( # to change time values into a numeric variable
+    departure_minutes = as.numeric(substr(time_of_departure, 1, 2)) * 60 +
+                        as.numeric(substr(time_of_departure, 4, 5))
+  )
+# fitting a linear model
+model <- lm(commute_time_minutes ~ departure_minutes, data = commute_clean)
+# plots to check assumptions 
+par(mfrow = c(2,2))
+plot(model)
+```
+
+#### run the analysis
+
+```{r}
+#| label: running the analysis
+#| message: false
+#| warning: false
+# model summary
+summary(model)
+# calculating effect size
+summary(model)$r.squared
+```
+
 ### d. Create a visualization
+
+```{r}
+#| label: Create a visulization
+#| message: false
+#| warning: false
+
+# create visualization for linear regression results
+# ggplot to create plot and relationship betwen x and y axis variables
+ggplot(commute_clean, aes(x = departure_minutes, 
+                          y = commute_time_minutes)) +
+  geom_point(color = "orchid2", # adds underlying data points
+             size = 3, # change size of point
+             alpha = 0.8) + # change transperancy
+
+  geom_smooth(method = "lm", se = TRUE, # adds linear regression line with 95% CI
+              color = "steelblue3",
+              fill = "lightblue4") +
+  # labes the x and y axis of graph 
+  labs(
+    x = "Time of departure(HH:MM)",
+    y = "Commute time (minutes)",
+    title = "Relationship between departure time and commute time"
+  ) +
+  # converts numeric minutes into readable military time
+  scale_x_continuous(
+    breaks = seq(300, 1020, by = 120),
+    labels = c("05:00","07:00","09:00","11:00","13:00","15:00","17:00")
+  ) +
+  
+  theme_classic() # changes theme and removes gridlines
+```
+
 ### e. Write a caption
-### f. Write about your results 
+
+Figure 2. Relationship between departure time and commute time. This figure shows the relationship between time of departure and commute time using a scatter plot of individual commute observations as pink dots. It shows a linear regression line in blue with a 95% confidence interval in a grayish color to show the trend between the variables. The x-axis represents the time of departure in HH:MM format, and the y-axis represents the commute time in minutes.
+
+### f. Write about your results
+
+There were no relationship between time of departure and commute time found. Commute time did correlate in a meaningful way with later departure times. The effect of departure time on commute time was found to be not statistically significant (linear regression: t = -0.247, p = 0.807), and the model did not explain none of the variation in commute time ($R^2$ = 0.0002). Although the regression line shows a slight downward trend, the pattern is weak and could be due to the variation in data points. This would suggest that other factors such as traffic conditions or route choice would have a stronger influence on commute time rather than comparing to departure time.
+
 ### g. Sharing your affective visualization
 
-
+![](images/Waves_through_the_coast.pdf)

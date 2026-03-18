@@ -203,7 +203,9 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># read in kelp data set</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"Annual_Kelp_All_Years_20250903.csv"</span>))</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># read in mountain plover data</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"MOPL_nest-site_selection_Duchardt_et_al._2019.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"MOPL_nest-site_selection_Duchardt_et_al._2019.csv"</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># read in commute data</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>commute <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"updated_commute.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="problem-1" class="level2">
 <h2 class="anchored" data-anchor-id="problem-1">Problem 1</h2>
@@ -255,11 +257,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Naples       2013        9.20
-2 Isla Vista   2002        3.47
-3 Isla Vista   2024       10.3 
-4 Carpinteria  2003        5.27
-5 Isla Vista   2005       18.9 </code></pre>
+1 Carpinteria  2014        7.26
+2 Naples       2009        5.44
+3 Carpinteria  2023        4.50
+4 Carpinteria  2024        5.67
+5 Naples       2010        5.27</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -334,10 +336,10 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="c.-table-of-models">c.&nbsp;Table of models</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
+<col style="width: 19%">
+<col style="width: 27%">
 <col style="width: 33%">
-<col style="width: 40%">
-<col style="width: 20%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -515,21 +517,115 @@ vo_nest | Predicted |     95% CI
 </section>
 <section id="b.-designing-an-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="b.-designing-an-analysis">b. Designing an analysis</h3>
+<p>Based on my response variable and one potential predictor variable I would use linear regression to analyze the relationship between my commute time (minutes) as the response variable and Time of Departure (HH:MM) as my predictor variable. This analysis is appropriate because my question focuses on how commute time changes based on what time I leave.</p>
 </section>
 <section id="c.-check-any-assumptions-and-run-your-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="c.-check-any-assumptions-and-run-your-analysis">c.&nbsp;Check any assumptions and run your analysis</h3>
+<section id="check-for-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="check-for-assumptions">check for assumptions</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean data and convert time to numeric (minutes)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new object</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>commute_clean <span class="ot">&lt;-</span> commute <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="co"># cleans name and columns</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="co"># to change time values into a numeric variable</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">departure_minutes =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(time_of_departure, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">60</span> <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">as.numeric</span>(<span class="fu">substr</span>(time_of_departure, <span class="dv">4</span>, <span class="dv">5</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting a linear model</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(commute_time_minutes <span class="sc">~</span> departure_minutes, <span class="at">data =</span> commute_clean)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plots to check assumptions </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_Final_files/figure-html/Checking%20assumptions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="run-the-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="run-the-analysis">run the analysis</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model summary</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = commute_time_minutes ~ departure_minutes, data = commute_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-11.055  -8.036  -5.112   8.415  37.187 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       73.269634   9.043841   8.102 1.05e-08 ***
+departure_minutes -0.003786   0.015319  -0.247    0.807    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.98 on 27 degrees of freedom
+Multiple R-squared:  0.002257,  Adjusted R-squared:  -0.0347 
+F-statistic: 0.06107 on 1 and 27 DF,  p-value: 0.8067</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating effect size</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002256595</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="d.-create-a-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="d.-create-a-visualization">d.&nbsp;Create a visualization</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create visualization for linear regression results</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot to create plot and relationship betwen x and y axis variables</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(commute_clean, <span class="fu">aes</span>(<span class="at">x =</span> departure_minutes, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> commute_time_minutes)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"orchid2"</span>, <span class="co"># adds underlying data points</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>, <span class="co"># change size of point</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> <span class="co"># change transperancy</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="co"># adds linear regression line with 95% CI</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"steelblue3"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"lightblue4"</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># labes the x and y axis of graph </span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time of departure(HH:MM)"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Commute time (minutes)"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between departure time and commute time"</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># converts numeric minutes into readable military time</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">300</span>, <span class="dv">1020</span>, <span class="at">by =</span> <span class="dv">120</span>),</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"05:00"</span>,<span class="st">"07:00"</span>,<span class="st">"09:00"</span>,<span class="st">"11:00"</span>,<span class="st">"13:00"</span>,<span class="st">"15:00"</span>,<span class="st">"17:00"</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="co"># changes theme and removes gridlines</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_Final_files/figure-html/Create%20a%20visulization-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="e.-write-a-caption" class="level3">
 <h3 class="anchored" data-anchor-id="e.-write-a-caption">e. Write a caption</h3>
+<p>Figure 2. Relationship between departure time and commute time. This figure shows the relationship between time of departure and commute time using a scatter plot of individual commute observations as pink dots. It shows a linear regression line in blue with a 95% confidence interval in a grayish color to show the trend between the variables. The x-axis represents the time of departure in HH:MM format, and the y-axis represents the commute time in minutes.</p>
 </section>
 <section id="f.-write-about-your-results" class="level3">
 <h3 class="anchored" data-anchor-id="f.-write-about-your-results">f.&nbsp;Write about your results</h3>
+<p>There were no relationship between time of departure and commute time found. Commute time did correlate in a meaningful way with later departure times. The effect of departure time on commute time was found to be not statistically significant (linear regression: t = -0.247, p = 0.807), and the model did not explain none of the variation in commute time (<span class="math inline">\(R^2\)</span> = 0.0002). Although the regression line shows a slight downward trend, the pattern is weak and could be due to the variation in data points. This would suggest that other factors such as traffic conditions or route choice would have a stronger influence on commute time rather than comparing to departure time.</p>
 </section>
 <section id="g.-sharing-your-affective-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="g.-sharing-your-affective-visualization">g. Sharing your affective visualization</h3>
+<p><embed src="images/Waves_through_the_coast.pdf" class="img-fluid">{width=“100%”, length = “100%}</p>
 </section>
 </section>
 </section>
