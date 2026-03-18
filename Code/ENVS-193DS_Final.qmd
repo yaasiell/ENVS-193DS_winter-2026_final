@@ -253,6 +253,8 @@ pred_0
 
 ### j. Interpret your results
 
+Based on my findings, the predicted probability of Mountain Plover nest cite occupancy at 0 being no visual obstruction (vo_nest = 0) is about 0.73 (95% CI: 0.65-0.80). In figure 1, it shows a visual representation that as visual obstruction increases, the probability of a nest site decreases represented by the blue model prediction line showing a downward trend. There was little or no evidence found that prairie dog colonies influenced the probability of Mountain Plover nesting in the models. To explain the trends biologically, the Mountain Plovers would rather prefer to nest in areas that are more open with lower vegetation near the areas. This could mean in biological terms that an increase of visual obstruction would likely reduce the nest site preference because it would limit their ability to see predators coming. 
+
 ## Problem 4. Affective and exploratory visualizations
 ### a. Comparing visualizations
 ### b. Designing an analysis
