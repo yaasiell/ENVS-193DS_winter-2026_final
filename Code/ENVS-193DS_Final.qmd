@@ -79,8 +79,10 @@ str(kelp_clean) # str() displays the structure of the data set
 ```
 
 ### b. Understanding the data
+The observation from 2000-09-22 in transect 6, quad 40 were filtered out because it had a frond value of -99999 which was used to represent missing data instead of an actual measurement.In the Methods and Protocls section of "KFCD abundance and size of giant kelp" data set in the SBC LTER's data catalog it indicates that the data was either not collected for a particular species or the datasheet was lost needing to be removed before being analyzed. 
 
 ### c. Visualize the data
+
 
 ### d. Interpretation
 

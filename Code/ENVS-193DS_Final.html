@@ -125,6 +125,32 @@ window.Quarto = {
   <li><a href="#problem-2.-data-visualization" id="toc-problem-2.-data-visualization" class="nav-link" data-scroll-target="#problem-2.-data-visualization">Problem 2. Data visualization</a>
   <ul class="collapse">
   <li><a href="#a.-cleaning-and-summarizing" id="toc-a.-cleaning-and-summarizing" class="nav-link" data-scroll-target="#a.-cleaning-and-summarizing">a. Cleaning and summarizing</a></li>
+  <li><a href="#b.-understanding-the-data" id="toc-b.-understanding-the-data" class="nav-link" data-scroll-target="#b.-understanding-the-data">b. Understanding the data</a></li>
+  <li><a href="#c.-visualize-the-data" id="toc-c.-visualize-the-data" class="nav-link" data-scroll-target="#c.-visualize-the-data">c.&nbsp;Visualize the data</a></li>
+  <li><a href="#d.-interpretation-1" id="toc-d.-interpretation-1" class="nav-link" data-scroll-target="#d.-interpretation-1">d.&nbsp;Interpretation</a></li>
+  </ul></li>
+  <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
+  <ul class="collapse">
+  <li><a href="#a.-response-variable" id="toc-a.-response-variable" class="nav-link" data-scroll-target="#a.-response-variable">a. Response variable</a></li>
+  <li><a href="#b.-purpose-of-study" id="toc-b.-purpose-of-study" class="nav-link" data-scroll-target="#b.-purpose-of-study">b. Purpose of study</a></li>
+  <li><a href="#c.-table-of-models" id="toc-c.-table-of-models" class="nav-link" data-scroll-target="#c.-table-of-models">c.&nbsp;Table of models</a></li>
+  <li><a href="#d.-run-the-models" id="toc-d.-run-the-models" class="nav-link" data-scroll-target="#d.-run-the-models">d.&nbsp;Run the models</a></li>
+  <li><a href="#e.-select-the-best-model" id="toc-e.-select-the-best-model" class="nav-link" data-scroll-target="#e.-select-the-best-model">e. Select the best model</a></li>
+  <li><a href="#f.-check-the-diagnostics" id="toc-f.-check-the-diagnostics" class="nav-link" data-scroll-target="#f.-check-the-diagnostics">f.&nbsp;Check the diagnostics</a></li>
+  <li><a href="#g.-visualize-the-model-predictions" id="toc-g.-visualize-the-model-predictions" class="nav-link" data-scroll-target="#g.-visualize-the-model-predictions">g. Visualize the model predictions</a></li>
+  <li><a href="#h.-write-a-caption-for-your-figure" id="toc-h.-write-a-caption-for-your-figure" class="nav-link" data-scroll-target="#h.-write-a-caption-for-your-figure">h. Write a caption for your figure</a></li>
+  <li><a href="#i.-calculate-model-predictions" id="toc-i.-calculate-model-predictions" class="nav-link" data-scroll-target="#i.-calculate-model-predictions">i. Calculate model predictions</a></li>
+  <li><a href="#j.-interpret-your-results" id="toc-j.-interpret-your-results" class="nav-link" data-scroll-target="#j.-interpret-your-results">j. Interpret your results</a></li>
+  </ul></li>
+  <li><a href="#problem-4.-affective-and-exploratory-visualizations" id="toc-problem-4.-affective-and-exploratory-visualizations" class="nav-link" data-scroll-target="#problem-4.-affective-and-exploratory-visualizations">Problem 4. Affective and exploratory visualizations</a>
+  <ul class="collapse">
+  <li><a href="#a.-comparing-visualizations" id="toc-a.-comparing-visualizations" class="nav-link" data-scroll-target="#a.-comparing-visualizations">a. Comparing visualizations</a></li>
+  <li><a href="#b.-designing-an-analysis" id="toc-b.-designing-an-analysis" class="nav-link" data-scroll-target="#b.-designing-an-analysis">b. Designing an analysis</a></li>
+  <li><a href="#c.-check-any-assumptions-and-run-your-analysis" id="toc-c.-check-any-assumptions-and-run-your-analysis" class="nav-link" data-scroll-target="#c.-check-any-assumptions-and-run-your-analysis">c.&nbsp;Check any assumptions and run your analysis</a></li>
+  <li><a href="#d.-create-a-visualization" id="toc-d.-create-a-visualization" class="nav-link" data-scroll-target="#d.-create-a-visualization">d.&nbsp;Create a visualization</a></li>
+  <li><a href="#e.-write-a-caption" id="toc-e.-write-a-caption" class="nav-link" data-scroll-target="#e.-write-a-caption">e. Write a caption</a></li>
+  <li><a href="#f.-write-about-your-results" id="toc-f.-write-about-your-results" class="nav-link" data-scroll-target="#f.-write-about-your-results">f.&nbsp;Write about your results</a></li>
+  <li><a href="#g.-sharing-your-affective-visualization" id="toc-g.-sharing-your-affective-visualization" class="nav-link" data-scroll-target="#g.-sharing-your-affective-visualization">g. Sharing your affective visualization</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -225,11 +251,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Naples       2005       10.2 
-2 Carpinteria  2012       16.6 
-3 Carpinteria  2017       13.4 
-4 Naples       2002        3.01
-5 Carpinteria  2001        4.42</code></pre>
+1 Isla Vista   2023        3.78
+2 Isla Vista   2012       12.8 
+3 Naples       2016        7.26
+4 Carpinteria  2022        9.52
+5 Naples       2008        6.62</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -239,6 +265,72 @@ window.Quarto = {
  $ mean_fronds: num [1:77] 1.8947 0.0606 3.0111 9.2596 7.8141 ...</code></pre>
 </div>
 </div>
+</section>
+<section id="b.-understanding-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="b.-understanding-the-data">b. Understanding the data</h3>
+</section>
+<section id="c.-visualize-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="c.-visualize-the-data">c.&nbsp;Visualize the data</h3>
+</section>
+<section id="d.-interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="d.-interpretation-1">d.&nbsp;Interpretation</h3>
+</section>
+</section>
+<section id="problem-3.-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="problem-3.-data-analysis">Problem 3. Data analysis</h2>
+<section id="a.-response-variable" class="level3">
+<h3 class="anchored" data-anchor-id="a.-response-variable">a. Response variable</h3>
+</section>
+<section id="b.-purpose-of-study" class="level3">
+<h3 class="anchored" data-anchor-id="b.-purpose-of-study">b. Purpose of study</h3>
+</section>
+<section id="c.-table-of-models" class="level3">
+<h3 class="anchored" data-anchor-id="c.-table-of-models">c.&nbsp;Table of models</h3>
+</section>
+<section id="d.-run-the-models" class="level3">
+<h3 class="anchored" data-anchor-id="d.-run-the-models">d.&nbsp;Run the models</h3>
+</section>
+<section id="e.-select-the-best-model" class="level3">
+<h3 class="anchored" data-anchor-id="e.-select-the-best-model">e. Select the best model</h3>
+</section>
+<section id="f.-check-the-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="f.-check-the-diagnostics">f.&nbsp;Check the diagnostics</h3>
+</section>
+<section id="g.-visualize-the-model-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="g.-visualize-the-model-predictions">g. Visualize the model predictions</h3>
+</section>
+<section id="h.-write-a-caption-for-your-figure" class="level3">
+<h3 class="anchored" data-anchor-id="h.-write-a-caption-for-your-figure">h. Write a caption for your figure</h3>
+</section>
+<section id="i.-calculate-model-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="i.-calculate-model-predictions">i. Calculate model predictions</h3>
+</section>
+<section id="j.-interpret-your-results" class="level3">
+<h3 class="anchored" data-anchor-id="j.-interpret-your-results">j. Interpret your results</h3>
+</section>
+</section>
+<section id="problem-4.-affective-and-exploratory-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="problem-4.-affective-and-exploratory-visualizations">Problem 4. Affective and exploratory visualizations</h2>
+<section id="a.-comparing-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="a.-comparing-visualizations">a. Comparing visualizations</h3>
+</section>
+<section id="b.-designing-an-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="b.-designing-an-analysis">b. Designing an analysis</h3>
+</section>
+<section id="c.-check-any-assumptions-and-run-your-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="c.-check-any-assumptions-and-run-your-analysis">c.&nbsp;Check any assumptions and run your analysis</h3>
+</section>
+<section id="d.-create-a-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="d.-create-a-visualization">d.&nbsp;Create a visualization</h3>
+</section>
+<section id="e.-write-a-caption" class="level3">
+<h3 class="anchored" data-anchor-id="e.-write-a-caption">e. Write a caption</h3>
+</section>
+<section id="f.-write-about-your-results" class="level3">
+<h3 class="anchored" data-anchor-id="f.-write-about-your-results">f.&nbsp;Write about your results</h3>
+</section>
+<section id="g.-sharing-your-affective-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="g.-sharing-your-affective-visualization">g. Sharing your affective visualization</h3>
 </section>
 </section>
 </section>
