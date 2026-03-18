@@ -254,11 +254,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Carpinteria  2023        4.50
-2 Isla Vista   2013        9.36
-3 Naples       2014        8.76
-4 Carpinteria  2010        3.53
-5 Carpinteria  2019        3.37</code></pre>
+1 Naples       2022        7.99
+2 Carpinteria  2003        5.27
+3 Isla Vista   2010        4.78
+4 Isla Vista   2018       34.5 
+5 Carpinteria  2012       16.6 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -399,10 +399,25 @@ window.Quarto = {
 </section>
 <section id="e.-select-the-best-model" class="level3">
 <h3 class="anchored" data-anchor-id="e.-select-the-best-model">e. Select the best model</h3>
-<p>The best model as determined by Akaike’s Information Criterion (AIC) was the visual obstruction at the nest as the only predictor of the probability of Mountain plover nest site usage because it had the lowest AIC value compared to all other models</p>
+<p>The best model as determined by Akaike’s Information Criterion (AIC) was the visual obstruction at the nest as the only predictor of the probability of Mountain plover nest site usage because it had the lowest AIC value compared to all other models.</p>
 </section>
 <section id="f.-check-the-diagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="f.-check-the-diagnostics">f.&nbsp;Check the diagnostics</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking diagnostics for the model I selected</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># simulates residuals based on fitted model (m2)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sim_res <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(m2)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize diagnostic plots that includes QQ test, dispersion test, and outlier test</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_Final_files/figure-html/Checking%20Diagnostics%20for%20model-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="g.-visualize-the-model-predictions" class="level3">
 <h3 class="anchored" data-anchor-id="g.-visualize-the-model-predictions">g. Visualize the model predictions</h3>

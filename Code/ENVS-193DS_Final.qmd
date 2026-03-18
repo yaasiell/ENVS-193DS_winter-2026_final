@@ -176,6 +176,17 @@ m4 <- glm(used_bin ~ vo_nest + edgedist, data = mopl_clean, family = "binomial")
 The best model as determined by Akaike's Information Criterion (AIC) was the visual obstruction at the nest as the only predictor of the probability of Mountain plover nest site usage because it had the lowest AIC value compared to all other models.
 
 ### f. Check the diagnostics
+```{r}
+#| label: Checking Diagnostics for model
+# checking diagnostics for the model I selected
+
+# simulates residuals based on fitted model (m2)
+sim_res <- simulateResiduals(m2)
+# visualize diagnostic plots that includes QQ test, dispersion test, and outlier test
+plot(sim_res)
+```
+
+
 ### g. Visualize the model predictions
 ### h. Write a caption for your figure
 ### i. Calculate model predictions
