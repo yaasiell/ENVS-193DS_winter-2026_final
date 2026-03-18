@@ -128,13 +128,53 @@ The site with the most variable mean kelp fronds per year was found to be Isla V
 The 0 and 1's in the data set represent the response variable if a potential nest site was used by a Mountain Plover. A value of 1 represents that a nest site was "used" by the Mountain Plover shown in the id column, and a value of 0 means that the site was "available" or unused by a Mountain Plover shown in the id column.
 
 ### b. Purpose of study 
-For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section. 
+For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section were visual obstruction is described as being a measure of vegitation structure. 
 
-For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions  because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge. 
+For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions  because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge in the Prairie dog colony-direct section. 
 
 ### c. Table of models
+| Model | Visual Obstruction (vo_nest) | Distance to Colony Edge (edgedist) | Model Description |
+|------|------------------------------|------------------------------------|------------------|
+| 1 | No | No | Null model (intercept only) |
+| 2 | Yes | No | Model with visual obstruction only |
+| 3 | No | Yes | Model with distance to colony edge only |
+| 4 | Yes | Yes | Full model with both predictors |
+
 ### d. Run the models
+```{r}
+#| label: Running Models
+#| message: false
+#| warning: false
+# Running the models
+mopl_clean <- mopl |> # created a new object 
+  clean_names() |> # changes column names to lowercase and underscores
+  # mutate to change the values to bianary numbers were 1 = used nest site, 0 = available
+  mutate(used_bin = if_else(id == "used", 1, 0)) |>
+  select(used_bin, edgedist, vo_nest) # select() keeps only the columns selected to be used as response and predictor variables
+
+```
+
+```{r}
+#| label: Running the models
+#| message: false
+#| warning: false
+#Running the Models
+
+# null model: includes only the intercept (no predictors)
+m1 <- glm(used_bin ~ 1, data = mopl_clean, family = "binomial")
+# model with visual obstruction as the only predictor
+m2 <- glm(used_bin ~ vo_nest, data = mopl_clean, family = "binomial")
+# model with distance to prairie dog colony edge as the only predictor
+m3 <- glm(used_bin ~ edgedist, data = mopl_clean, family = "binomial")
+# full model: includes both predictors
+m4 <- glm(used_bin ~ vo_nest + edgedist, data = mopl_clean, family = "binomial")
+
+```
+
 ### e. Select the best model
+
+The best model as determined by Akaike's Information Criterion (AIC) was the visual obstruction at the nest as the only predictor of the probability of Mountain plover nest site usage because it had the lowest AIC value compared to all other models.
+
 ### f. Check the diagnostics
 ### g. Visualize the model predictions
 ### h. Write a caption for your figure
