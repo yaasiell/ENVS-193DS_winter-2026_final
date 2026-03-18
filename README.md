@@ -15,4 +15,4 @@ Contains all the data sets used in this project
 Contains all the main Quarto document for the assignment
 
 ## Rendered output
-The rendered output for the Final assignment is found here
+The rendered output for the Final assignment is found [here](https://yaasiell.github.io/ENVS-193DS_winter-2026_final/Code/ENVS-193DS_Final.html)
