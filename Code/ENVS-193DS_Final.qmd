@@ -125,8 +125,13 @@ The site with the most variable mean kelp fronds per year was found to be Isla V
 ## Problem 3. Data analysis
 
 ### a. Response variable 
+The 0 and 1's in the data set represent the response variable if a potential nest site was used by a Mountain Plover. A value of 1 represents that a nest site was "used" by the Mountain Plover shown in the id column, and a value of 0 means that the site was "available" or unused by a Mountain Plover shown in the id column.
 
 ### b. Purpose of study 
+For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section. 
+
+For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions  because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge. 
+
 ### c. Table of models
 ### d. Run the models
 ### e. Select the best model

@@ -198,8 +198,11 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># direct file paths to call from</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># to examine and read in data</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># reads excel files</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in kelp data set</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"Annual_Kelp_All_Years_20250903.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa) <span class="co"># checks diagnostics for model using simulated residuals</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read in kelp data set</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>kelp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"Annual_Kelp_All_Years_20250903.csv"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># read in mountain plover data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mopl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"MOPL_nest-site_selection_Duchardt_et_al._2019.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="problem-1" class="level2">
 <h2 class="anchored" data-anchor-id="problem-1">Problem 1</h2>
@@ -251,11 +254,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   site_name    year mean_fronds
   &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 Naples       2025        8.44
-2 Isla Vista   2020       25.0 
-3 Naples       2006        5.11
-4 Carpinteria  2010        3.53
-5 Naples       2023        4.87</code></pre>
+1 Carpinteria  2016        4.97
+2 Carpinteria  2006       10.8 
+3 Isla Vista   2023        3.78
+4 Naples       2014        8.76
+5 Naples       2021       10.5 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(kelp_clean) <span class="co"># str() displays the structure of the data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -319,9 +322,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="problem-3.-data-analysis">Problem 3. Data analysis</h2>
 <section id="a.-response-variable" class="level3">
 <h3 class="anchored" data-anchor-id="a.-response-variable">a. Response variable</h3>
+<p>The 0 and 1’s in the data set represent the response variable if a potential nest site was used by a Mountain Plover. A value of 1 represents that a nest site was “used” by the Mountain Plover shown in the id column, and a value of 0 means that the site was “available” or unused by a Mountain Plover shown in the id column.</p>
 </section>
 <section id="b.-purpose-of-study" class="level3">
 <h3 class="anchored" data-anchor-id="b.-purpose-of-study">b. Purpose of study</h3>
+<p>For the first variable I found to be Visual obstruction as a continuous variable because it measured vegetation height and density around the nesting site using a Robel pole. As the visual obstruction increases, the probability of a Mountain Plover nest site being used would decrease because they prefer live in areas with lower vegetation so they can see predators better. This information was found in the Methods Adults Mountain Plover Density in the Data collection section.</p>
+<p>For the second predictor variable of Distance to prairie dog colony edge it is also a continuous variable that is meant to represent how far a nesting location is from from a prairie colony. As the distance from the colony edge increases, the probability that a Mountain Plover nesting site would decrease or vary depending on habitat conditions because the prairie dog would create an open habitat that the Plover might like. This information was found in the Methods Modeling framework section in table 1 that shows the distance to colony edge.</p>
 </section>
 <section id="c.-table-of-models" class="level3">
 <h3 class="anchored" data-anchor-id="c.-table-of-models">c.&nbsp;Table of models</h3>
